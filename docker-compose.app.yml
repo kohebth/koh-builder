@@ -1,0 +1,18 @@
+version: '3.8'
+
+x-shared-env: &shared-env
+  SERVICE: ${SERVICE}
+  SERVICE_PORT: ${SERVICE_PORT}
+  DEBUG: ${DEBUG}
+  DEBUG_PORT: ${DEBUG_PORT}
+  DEBUG_SUSPEND: ${DEBUG_SUSPEND}
+
+services:
+  app:
+    container_name: ${SERVICE}
+    image: ${SERVICE}
+    build:
+      dockerfile: docker/app/Dockerfile
+      args:
+        JAR_PATH: view/build/libs/view-SNAPSHOT.jar
+    environment: *shared-env

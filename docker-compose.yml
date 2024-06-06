@@ -1,0 +1,23 @@
+version: '3.8'
+
+x-shared-env: &shared-env
+  LOCAL_USER: ${USER}
+
+services:
+  mvn:
+    environment: *shared-env
+    build:
+      dockerfile: docker/mvn/Dockerfile
+      context: ./
+    image: builder-mvn
+    volumes:
+      - ./${SERVICE}:/home/mvn
+
+  gradle:
+    environment: *shared-env
+    build:
+      dockerfile: docker/gradle/Dockerfile
+      context: ./
+    image: builder-gradle
+    volumes:
+      - ./${SERVICE}:/home/gradle
